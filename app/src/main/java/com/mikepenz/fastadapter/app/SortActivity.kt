@@ -16,7 +16,7 @@ import butterknife.ButterKnife
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.select.SelectExtension
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
@@ -36,10 +36,10 @@ import java.util.*
 class SortActivity : AppCompatActivity() {
 
     //save our FastAdapter
-    private lateinit var fastAdapter: FastAdapter<SimpleItem>
-    private lateinit var itemAdapter: ItemAdapter<SimpleItem>
-    private lateinit var itemListImpl: ComparableItemListImpl<SimpleItem>
-    private lateinit var selectExtension: SelectExtension<SimpleItem>
+    private lateinit var fastAdapter: FastAdapter<ProviderDetailItem>
+    private lateinit var itemAdapter: ItemAdapter<ProviderDetailItem>
+    private lateinit var itemListImpl: ComparableItemListImpl<ProviderDetailItem>
+    private lateinit var selectExtension: SelectExtension<ProviderDetailItem>
 
     @SortingStrategy
     private var sortingStrategy: Int = 0
@@ -50,7 +50,7 @@ class SortActivity : AppCompatActivity() {
      *
      * @return The comparator or null.
      */
-    private val comparator: Comparator<SimpleItem>?
+    private val comparator: Comparator<ProviderDetailItem>?
         get() {
             when (sortingStrategy) {
                 SORT_ASCENDING -> return AlphabetComparatorAscending()
@@ -78,7 +78,7 @@ class SortActivity : AppCompatActivity() {
         selectExtension.isSelectable = true
 
         //configure our fastAdapter
-        fastAdapter.onClickListener = { _: View?, _: IAdapter<SimpleItem>, item: SimpleItem, _: Int ->
+        fastAdapter.onClickListener = { _: View?, _: IAdapter<ProviderDetailItem>, item: ProviderDetailItem, _: Int ->
             Toast.makeText(this@SortActivity, item.name?.getText(this@SortActivity), Toast.LENGTH_LONG).show()
             false
         }
@@ -171,8 +171,8 @@ class SortActivity : AppCompatActivity() {
      *
      * @return The new list.
      */
-    private fun generateUnsortedList(): List<SimpleItem> {
-        val result = ArrayList<SimpleItem>(26)
+    private fun generateUnsortedList(): List<ProviderDetailItem> {
+        val result = ArrayList<ProviderDetailItem>(26)
         for (i in 0..25) {
             result.add(makeItem(i))
         }
@@ -186,9 +186,9 @@ class SortActivity : AppCompatActivity() {
      * @param position The position of the letter in the alphabet.
      * @return The new item.
      */
-    private fun makeItem(@IntRange(from = 0, to = 25) _position: Int): SimpleItem {
+    private fun makeItem(@IntRange(from = 0, to = 25) _position: Int): ProviderDetailItem {
         var position = _position
-        val result = SimpleItem()
+        val result = ProviderDetailItem()
 
         result.withName(ALPHABET[position])
 
@@ -216,8 +216,8 @@ class SortActivity : AppCompatActivity() {
     /**
      * A simple Comparator to sort the items ascending.
      */
-    private inner class AlphabetComparatorAscending : Comparator<SimpleItem>, Serializable {
-        override fun compare(lhs: SimpleItem, rhs: SimpleItem): Int {
+    private inner class AlphabetComparatorAscending : Comparator<ProviderDetailItem>, Serializable {
+        override fun compare(lhs: ProviderDetailItem, rhs: ProviderDetailItem): Int {
             return lhs.name?.textString.toString().compareTo(rhs.name?.textString.toString())
         }
     }
@@ -225,8 +225,8 @@ class SortActivity : AppCompatActivity() {
     /**
      * A simple Comparator to sort the items descending.
      */
-    private inner class AlphabetComparatorDescending : Comparator<SimpleItem>, Serializable {
-        override fun compare(lhs: SimpleItem, rhs: SimpleItem): Int {
+    private inner class AlphabetComparatorDescending : Comparator<ProviderDetailItem>, Serializable {
+        override fun compare(lhs: ProviderDetailItem, rhs: ProviderDetailItem): Int {
             return rhs.name?.textString.toString().compareTo(lhs.name?.textString.toString())
         }
     }

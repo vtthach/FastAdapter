@@ -15,7 +15,7 @@ import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import com.mikepenz.fastadapter.app.adapters.StickyHeaderAdapter
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubExpandableItem
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubItem
 import com.mikepenz.fastadapter.expandable.getExpandableExtension
@@ -34,7 +34,7 @@ class AdvancedSampleActivity : AppCompatActivity() {
 
     //save our FastAdapter
     private lateinit var mFastAdapter: GenericFastAdapter
-    private lateinit var mHeaderAdapter: ItemAdapter<SimpleItem>
+    private lateinit var mHeaderAdapter: ItemAdapter<ProviderDetailItem>
     private lateinit var mItemAdapter: GenericItemAdapter
 
     private var mActionModeHelper: ActionModeHelper<GenericItem>? = null
@@ -66,6 +66,7 @@ class AdvancedSampleActivity : AppCompatActivity() {
         selectExtension.isSelectable = true
         selectExtension.multiSelect = true
         selectExtension.selectOnLongClick = true
+        selectExtension.selectionListener
 
         mFastAdapter.onPreClickListener = { _: View?, _: GenericAdapter, item: GenericItem, _: Int ->
             //we handle the default onClick behavior for the actionMode. This will return null if it didn't do anything and you can handle a normal onClick
@@ -122,7 +123,7 @@ class AdvancedSampleActivity : AppCompatActivity() {
     }
 
     private fun setItems() {
-        val sampleItem = SimpleItem().withName("Header")
+        val sampleItem = ProviderDetailItem().withName("Header")
         sampleItem.isSelectable = false
         sampleItem.identifier = 1
         mHeaderAdapter.add(sampleItem)

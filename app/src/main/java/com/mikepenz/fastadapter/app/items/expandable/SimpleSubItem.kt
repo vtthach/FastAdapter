@@ -35,7 +35,7 @@ open class SimpleSubItem : AbstractExpandableItem<SimpleSubItem.ViewHolder>(), I
      * @return the layout for this item
      */
     override val layoutRes: Int
-        get() = R.layout.sample_item
+        get() = R.layout.provider_item
 
     fun withHeader(header: String): SimpleSubItem {
         this.header = header

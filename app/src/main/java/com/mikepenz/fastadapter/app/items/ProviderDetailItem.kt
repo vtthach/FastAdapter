@@ -14,7 +14,7 @@ import com.mikepenz.materialdrawer.holder.StringHolder
 /**
  * Created by mikepenz on 28.12.15.
  */
-open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
+open class ProviderDetailItem : AbstractItem<ProviderDetailItem.ViewHolder>(), IDraggable {
 
     var header: String? = null
     var name: StringHolder? = null
@@ -28,7 +28,7 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
      * @return the type
      */
     override val type: Int
-        get() = R.id.fastadapter_sample_item_id
+        get() = R.id.fastadapter_provider_detail_item_id
 
     /**
      * defines the layout which will be used for this item in the list
@@ -36,39 +36,39 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
      * @return the layout for this item
      */
     override val layoutRes: Int
-        get() = R.layout.sample_item
+        get() = R.layout.provider_item
 
-    fun withHeader(header: String): SimpleItem {
+    fun withHeader(header: String): ProviderDetailItem {
         this.header = header
         return this
     }
 
-    fun withName(Name: String): SimpleItem {
+    fun withName(Name: String): ProviderDetailItem {
         this.name = StringHolder(Name)
         return this
     }
 
-    fun withName(@StringRes NameRes: Int): SimpleItem {
+    fun withName(@StringRes NameRes: Int): ProviderDetailItem {
         this.name = StringHolder(NameRes)
         return this
     }
 
-    fun withDescription(description: String): SimpleItem {
+    fun withDescription(description: String): ProviderDetailItem {
         this.description = StringHolder(description)
         return this
     }
 
-    fun withDescription(@StringRes descriptionRes: Int): SimpleItem {
+    fun withDescription(@StringRes descriptionRes: Int): ProviderDetailItem {
         this.description = StringHolder(descriptionRes)
         return this
     }
 
-    fun withIdentifier(identifier: Long): SimpleItem {
+    fun withIdentifier(identifier: Long): ProviderDetailItem {
         this.identifier = identifier
         return this
     }
 
-    fun withIsDraggable(draggable: Boolean): SimpleItem {
+    fun withIsDraggable(draggable: Boolean): ProviderDetailItem {
         this.isDraggable = draggable
         return this
     }
@@ -80,11 +80,11 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
     /**
      * our ViewHolder
      */
-    class ViewHolder(private var view: View) : FastAdapter.ViewHolder<SimpleItem>(view) {
+    class ViewHolder(private var view: View) : FastAdapter.ViewHolder<ProviderDetailItem>(view) {
         var name: TextView = view.findViewById(R.id.material_drawer_name)
         var description: TextView = view.findViewById(R.id.material_drawer_description)
 
-        override fun bindView(item: SimpleItem, payloads: List<Any>) {
+        override fun bindView(item: ProviderDetailItem, payloads: List<Any>) {
             //get the context
             val ctx = itemView.context
 
@@ -96,7 +96,7 @@ open class SimpleItem : AbstractItem<SimpleItem.ViewHolder>(), IDraggable {
             StringHolder.applyToOrHide(item.description, description)
         }
 
-        override fun unbindView(item: SimpleItem) {
+        override fun unbindView(item: ProviderDetailItem) {
             name.text = null
             description.text = null
         }

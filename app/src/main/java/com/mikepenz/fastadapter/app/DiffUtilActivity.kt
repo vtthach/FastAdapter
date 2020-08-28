@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_sample.*
 class DiffUtilActivity : AppCompatActivity() {
 
     //save our FastAdapter
-    private lateinit var fastItemAdapter: FastItemAdapter<SimpleItem>
+    private lateinit var fastItemAdapter: FastItemAdapter<ProviderDetailItem>
     private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,10 +111,10 @@ class DiffUtilActivity : AppCompatActivity() {
                 .subscribe { result -> FastAdapterDiffUtil[fastItemAdapter.itemAdapter] = result })
     }
 
-    private fun createData(): List<SimpleItem> {
-        val items = mutableListOf<SimpleItem>()
+    private fun createData(): List<ProviderDetailItem> {
+        val items = mutableListOf<ProviderDetailItem>()
         repeat(100) {
-            items.add(SimpleItem().withName("Item ${it + 1}").withIdentifier((it + 1).toLong()))
+            items.add(ProviderDetailItem().withName("Item ${it + 1}").withIdentifier((it + 1).toLong()))
         }
         items.shuffle()
         return items

@@ -47,4 +47,5 @@
     <string name="open_source">Open Source</string>
     <string name="search_title">Suche</string>
     <string name="action_undo">UNDO</string>
+    <string name="provider_detail_input_hint">R170.00 - R 1 000.00</string>
 </resources>

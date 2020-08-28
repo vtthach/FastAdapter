@@ -30,6 +30,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <Button
+            android:id="@+id/btnRefresh"
+            android:text="Refresh"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <com.turingtechnologies.materialscrollbar.DragScrollBar
             android:id="@+id/dragScrollBar"
             android:layout_width="wrap_content"

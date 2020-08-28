@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.app.R
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubExpandableItem
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubItem
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
@@ -44,7 +44,7 @@ class StickyHeaderAdapter<Item : GenericItem> : RecyclerView.Adapter<RecyclerVie
         //in our sample we want a separate header per first letter of our items
         //this if is not necessary for your code, we only use it as this sticky header is reused for different item implementations
         return when (val item = getItem(position)) {
-            is SimpleItem -> item.header?.getOrNull(0)?.toLong() ?: 0
+            is ProviderDetailItem -> item.header?.getOrNull(0)?.toLong() ?: 0
             is SimpleSubItem -> item.header?.getOrNull(0)?.toLong() ?: 0
             is SimpleSubExpandableItem -> item.header?.getOrNull(0)?.toLong() ?: 0
             else -> -1
@@ -61,7 +61,7 @@ class StickyHeaderAdapter<Item : GenericItem> : RecyclerView.Adapter<RecyclerVie
         val textView = holder.itemView as TextView
 
         textView.text = when (val item = getItem(position)) {
-            is SimpleItem -> item.header?.getOrNull(0)?.toString()
+            is ProviderDetailItem -> item.header?.getOrNull(0)?.toString()
             is SimpleSubItem -> item.header?.getOrNull(0)?.toString()
             is SimpleSubExpandableItem -> item.header?.getOrNull(0)?.toString()
             // Fallback to same value

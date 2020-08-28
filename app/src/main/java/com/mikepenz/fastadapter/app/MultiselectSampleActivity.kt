@@ -16,7 +16,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.ISelectionListener
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.helpers.ActionModeHelper
 import com.mikepenz.fastadapter.helpers.UndoHelper
 import com.mikepenz.fastadapter.select.SelectExtension
@@ -27,10 +27,10 @@ import java.util.*
 
 class MultiselectSampleActivity : AppCompatActivity() {
     //save our FastAdapter
-    private lateinit var mFastAdapter: FastAdapter<SimpleItem>
+    private lateinit var mFastAdapter: FastAdapter<ProviderDetailItem>
     private lateinit var mUndoHelper: UndoHelper<*>
-    private lateinit var mActionModeHelper: ActionModeHelper<SimpleItem>
-    private lateinit var selectExtension: SelectExtension<SimpleItem>
+    private lateinit var mActionModeHelper: ActionModeHelper<ProviderDetailItem>
+    private lateinit var selectExtension: SelectExtension<ProviderDetailItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +42,8 @@ class MultiselectSampleActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.sample_multi_select)
 
         //create our adapters
-        val headerAdapter = ItemAdapter<SimpleItem>()
-        val itemAdapter = ItemAdapter<SimpleItem>()
+        val headerAdapter = ItemAdapter<ProviderDetailItem>()
+        val itemAdapter = ItemAdapter<ProviderDetailItem>()
 
         //create our FastAdapter
         mFastAdapter = FastAdapter.with(listOf(headerAdapter, itemAdapter))
@@ -56,27 +56,27 @@ class MultiselectSampleActivity : AppCompatActivity() {
             isSelectable = true
             multiSelect = true
             selectOnLongClick = true
-            selectionListener = object : ISelectionListener<SimpleItem> {
-                override fun onSelectionChanged(item: SimpleItem, selected: Boolean) {
+            selectionListener = object : ISelectionListener<ProviderDetailItem> {
+                override fun onSelectionChanged(item: ProviderDetailItem, selected: Boolean) {
                     Log.i("FastAdapter", "SelectedCount: " + selectExtension.selections.size + " ItemsCount: " + selectExtension.selectedItems.size)
                 }
             }
         }
 
-        mFastAdapter.onPreClickListener = { _: View?, _: IAdapter<SimpleItem>, item: SimpleItem, _: Int ->
+        mFastAdapter.onPreClickListener = { _: View?, _: IAdapter<ProviderDetailItem>, item: ProviderDetailItem, _: Int ->
             //we handle the default onClick behavior for the actionMode. This will return null if it didn't do anything and you can handle a normal onClick
             val res = mActionModeHelper.onClick(item)
             res ?: false
         }
 
-        mFastAdapter.onClickListener = { v: View?, _: IAdapter<SimpleItem>, _: SimpleItem, _: Int ->
+        mFastAdapter.onClickListener = { v: View?, _: IAdapter<ProviderDetailItem>, _: ProviderDetailItem, _: Int ->
             if (v != null) {
                 Toast.makeText(v.context, "SelectedCount: " + selectExtension.selections.size + " ItemsCount: " + selectExtension.selectedItems.size, Toast.LENGTH_SHORT).show()
             }
             false
         }
 
-        mFastAdapter.onPreLongClickListener = { _: View, _: IAdapter<SimpleItem>, _: SimpleItem, position: Int ->
+        mFastAdapter.onPreLongClickListener = { _: View, _: IAdapter<ProviderDetailItem>, _: ProviderDetailItem, position: Int ->
             val actionMode = mActionModeHelper.onLongClick(this@MultiselectSampleActivity, position)
             if (actionMode != null) {
                 //we want color our CAB
@@ -87,8 +87,8 @@ class MultiselectSampleActivity : AppCompatActivity() {
         }
 
         //
-        mUndoHelper = UndoHelper(mFastAdapter, object : UndoHelper.UndoListener<SimpleItem> {
-            override fun commitRemove(positions: Set<Int>, removed: ArrayList<FastAdapter.RelativeInfo<SimpleItem>>) {
+        mUndoHelper = UndoHelper(mFastAdapter, object : UndoHelper.UndoListener<ProviderDetailItem> {
+            override fun commitRemove(positions: Set<Int>, removed: ArrayList<FastAdapter.RelativeInfo<ProviderDetailItem>>) {
                 Log.e("UndoHelper", "Positions: " + positions.toString() + " Removed: " + removed.size)
             }
         })
@@ -102,15 +102,15 @@ class MultiselectSampleActivity : AppCompatActivity() {
         rv.adapter = mFastAdapter
 
         //fill with some sample data
-        val simpleItem = SimpleItem()
+        val simpleItem = ProviderDetailItem()
         simpleItem
                 .withName("Header")
         simpleItem.identifier = 2
         simpleItem.isSelectable = false
         headerAdapter.add(simpleItem)
-        val items = ArrayList<SimpleItem>()
+        val items = ArrayList<ProviderDetailItem>()
         for (i in 1..100) {
-            val item = SimpleItem()
+            val item = ProviderDetailItem()
             item.withName("Test $i")
             item.identifier = (100 + i).toLong()
             items.add(item)

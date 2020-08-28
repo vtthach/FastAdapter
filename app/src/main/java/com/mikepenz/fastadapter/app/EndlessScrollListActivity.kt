@@ -17,7 +17,7 @@ import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import com.mikepenz.fastadapter.adapters.GenericFastItemAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.drag.ItemTouchCallback
 import com.mikepenz.fastadapter.drag.SimpleDragCallback
 import com.mikepenz.fastadapter.listeners.ItemFilterListener
@@ -64,7 +64,7 @@ class EndlessScrollListActivity : AppCompatActivity(), ItemTouchCallback, ItemFi
 
         //configure our fastAdapter
         fastItemAdapter.onClickListener = { v, _, item, _ ->
-            if (v != null && item is SimpleItem) {
+            if (v != null && item is ProviderDetailItem) {
                 Toast.makeText(v.context, item.name?.getText(v.context), Toast.LENGTH_LONG).show()
             }
             false
@@ -72,7 +72,7 @@ class EndlessScrollListActivity : AppCompatActivity(), ItemTouchCallback, ItemFi
 
         //configure the itemAdapter
         fastItemAdapter.itemFilter.filterPredicate = { item: GenericItem, constraint: CharSequence? ->
-            if (item is SimpleItem) {
+            if (item is ProviderDetailItem) {
                 //return true if we should filter it out
                 item.name?.textString.toString().contains(constraint.toString(), ignoreCase = true)
             } else {
@@ -98,7 +98,7 @@ class EndlessScrollListActivity : AppCompatActivity(), ItemTouchCallback, ItemFi
                 handler.postDelayed({
                     footerAdapter.clear()
                     for (i in 1..15) {
-                        fastItemAdapter.add(fastItemAdapter.adapterItemCount, SimpleItem().withName("Item $i Page $currentPage"))
+                        fastItemAdapter.add(fastItemAdapter.adapterItemCount, ProviderDetailItem().withName("Item $i Page $currentPage"))
                     }
                 }, 2000)
             }
@@ -106,9 +106,9 @@ class EndlessScrollListActivity : AppCompatActivity(), ItemTouchCallback, ItemFi
         rv.addOnScrollListener(endlessRecyclerOnScrollListener)
 
         //fill with some sample data (load the first page here)
-        val items = ArrayList<SimpleItem>()
+        val items = ArrayList<ProviderDetailItem>()
         for (i in 1..15) {
-            items.add(SimpleItem().withName("Item $i Page 0"))
+            items.add(ProviderDetailItem().withName("Item $i Page 0"))
         }
         fastItemAdapter.add(items)
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.app.adapters.StickyHeaderAdapter
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mikepenz.fastadapter.select.getSelectExtension
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
 import kotlinx.android.synthetic.main.activity_sample.*
@@ -22,7 +22,7 @@ import java.util.*
 class StickyHeaderSampleActivity : AppCompatActivity() {
 
     //save our FastAdapter
-    private lateinit var fastAdapter: FastAdapter<SimpleItem>
+    private lateinit var fastAdapter: FastAdapter<ProviderDetailItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +33,9 @@ class StickyHeaderSampleActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.sample_sticky_header)
 
         //create our adapters
-        val stickyHeaderAdapter = StickyHeaderAdapter<SimpleItem>()
-        val headerAdapter = ItemAdapter<SimpleItem>()
-        val itemAdapter = ItemAdapter<SimpleItem>()
+        val stickyHeaderAdapter = StickyHeaderAdapter<ProviderDetailItem>()
+        val headerAdapter = ItemAdapter<ProviderDetailItem>()
+        val itemAdapter = ItemAdapter<ProviderDetailItem>()
 
         //create our FastAdapter
         fastAdapter = FastAdapter.with(listOf(headerAdapter, itemAdapter))
@@ -56,12 +56,12 @@ class StickyHeaderSampleActivity : AppCompatActivity() {
         rv.addItemDecoration(decoration)
 
         //fill with some sample data
-        val item = SimpleItem().withName("Header")
+        val item = ProviderDetailItem().withName("Header")
         item.identifier = 1
         headerAdapter.add(item)
-        val items = ArrayList<SimpleItem>()
+        val items = ArrayList<ProviderDetailItem>()
         for (i in 1..100) {
-            val simpleItem = SimpleItem().withName("Test $i").withHeader(headers[i / 5])
+            val simpleItem = ProviderDetailItem().withName("Test $i").withHeader(headers[i / 5])
             simpleItem.identifier = (100 + i).toLong()
             items.add(simpleItem)
         }

@@ -11,7 +11,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.app.adapters.MopubFastItemAdapter
 import com.mikepenz.fastadapter.app.adapters.StickyHeaderAdapter
 import com.mikepenz.fastadapter.app.helpers.CustomStickyRecyclerHeadersDecoration
-import com.mikepenz.fastadapter.app.items.SimpleItem
+import com.mikepenz.fastadapter.app.items.ProviderDetailItem
 import com.mopub.nativeads.MoPubRecyclerAdapter
 import com.mopub.nativeads.MoPubStaticNativeAdRenderer
 import com.mopub.nativeads.ViewBinder
@@ -24,7 +24,7 @@ import java.util.*
 
 class StickyHeaderMopubAdsActivity : AppCompatActivity() {
 
-    private lateinit var mAdapter: MopubFastItemAdapter<SimpleItem>
+    private lateinit var mAdapter: MopubFastItemAdapter<ProviderDetailItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class StickyHeaderMopubAdsActivity : AppCompatActivity() {
         // Handle Toolbar
         setSupportActionBar(toolbar)
 
-        val stickyHeaderAdapter = StickyHeaderAdapter<SimpleItem>()
-        val headerAdapter = ItemAdapter<SimpleItem>()
+        val stickyHeaderAdapter = StickyHeaderAdapter<ProviderDetailItem>()
+        val headerAdapter = ItemAdapter<ProviderDetailItem>()
         mAdapter = MopubFastItemAdapter()
         mAdapter.addAdapter(0, headerAdapter)
 
@@ -65,9 +65,9 @@ class StickyHeaderMopubAdsActivity : AppCompatActivity() {
         rv.addItemDecoration(decoration)
 
         //fill with some sample data
-        val items = ArrayList<SimpleItem>()
+        val items = ArrayList<ProviderDetailItem>()
         for (i in 1..100) {
-            val simpleItem = SimpleItem().withName("Test $i").withHeader(headers[i / 5])
+            val simpleItem = ProviderDetailItem().withName("Test $i").withHeader(headers[i / 5])
             simpleItem.identifier = (100 + i).toLong()
             items.add(simpleItem)
         }
